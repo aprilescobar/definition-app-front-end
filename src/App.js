@@ -2,7 +2,8 @@ import React from 'react';
 
 function App() {
   const Owlbot = require('owlbot-js');
-  const client = Owlbot('7ab0c1cee24e74180a1a063d4c7960b27ade6f5d')
+  const token = process.env.REACT_APP_OWLBOT_API_TOKEN
+  const client = Owlbot(token)
 
   const lookUp = 'wonder'
 
