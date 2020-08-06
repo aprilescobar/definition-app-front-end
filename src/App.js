@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
+  const Owlbot = require('owlbot-js');
+  const client = Owlbot('7ab0c1cee24e74180a1a063d4c7960b27ade6f5d')
+
+  const lookUp = 'wonder'
+
+  const renderDefinition = () => {
+    client.define(lookUp).then(function(result){
+      console.log(result)
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello</h1>
+      {renderDefinition()}
     </div>
   );
 }
