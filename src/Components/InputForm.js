@@ -17,6 +17,7 @@ export default function InputForm() {
         client.define(word).then(function(result){
             setDefined(result)
             setShowCard(true)
+            setWord('')
         })
     }
 
@@ -24,16 +25,18 @@ export default function InputForm() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="word">Enter a word:</label>
-                    <input type="text" ref={wordEl} value={word} onChange={e => setWord(e.target.value)}/>
-                </div>
-                <div className="form-group">
-                    <button className="button">Define</button>
-                </div>
-            </form>
-            <div className="card-grd">
+            <div className="header">
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="word">Enter a word:</label>
+                        <input type="text" ref={wordEl} value={word} onChange={e => setWord(e.target.value)}/>
+                    </div>
+                    <div className="form-group">
+                        <button className="button">Define</button>
+                    </div>
+                </form>
+            </div>
+            <div className="card-grid">
                 {showCard && renderCard(defined.word, defined.definitions)}
             </div>
         </div>
