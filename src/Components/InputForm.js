@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import WordCard from './WordCard';
-import { useContext } from 'react';
-import { WordContext } from '../Store';
+import { WordContext, ShowCardContext } from '../Context/WordCon';
 
 export default function InputForm() {
     const token = process.env.REACT_APP_OWLBOT_API_TOKEN
@@ -9,8 +8,9 @@ export default function InputForm() {
     const client = Owlbot(token)
     
     const [defined, setDefined] = useContext(WordContext)
+    const [showCard, setShowCard] = useContext(ShowCardContext)
+    
     const [word, setWord] = useState('')
-    const [showCard, setShowCard] = useState(false)
     const [showWordError, setShowWordError] = useState(false)
     
     const wordEl = useRef()
@@ -30,7 +30,6 @@ export default function InputForm() {
 
     return (
         <div>
-            {console.log(word)}
             <div className="header">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

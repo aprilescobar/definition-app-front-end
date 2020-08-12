@@ -4,19 +4,22 @@ import Header from './Components/Header';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import InputForm from './Components/InputForm';
 import Saved from './Saved';
-import Store from './Store';
+import WordCon from './Context/WordCon';
+import WordListCon from './Context/WordListCon';
 
 function App() {
   return (
     <div className="container">
     <Router>
-      <Store>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={InputForm}/>
-          <Route exact path='/saved' component={Saved}/>
-        </Switch>
-      </Store>
+      <WordCon>
+        <WordListCon>
+          <Header />
+          <Switch>
+            <Route exact path='/' component={InputForm}/>
+            <Route exact path='/saved' component={Saved}/>
+          </Switch>
+        </WordListCon>
+      </WordCon>
     </Router>
     </div>
   );
