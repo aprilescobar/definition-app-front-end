@@ -4,16 +4,19 @@ import Header from './Components/Header';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import InputForm from './Components/InputForm';
 import Saved from './Saved';
+import Store from './Store';
 
 function App() {
   return (
     <div className="container">
     <Router>
-      <Header />
-      <Switch>
-        <Route exact path='/' component={InputForm}/>
-        <Route exact path='/saved' component={Saved}/>
-      </Switch>
+      <Store>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={InputForm}/>
+          <Route exact path='/saved' component={Saved}/>
+        </Switch>
+      </Store>
     </Router>
     </div>
   );
