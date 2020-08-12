@@ -130,3 +130,10 @@ body{
     margin-top: 1rem;
     text-align: center;
 }
+
+small{
+    color: rgb(255, 55, 55);
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}

@@ -9,19 +9,25 @@ export default function InputForm() {
     const [word, setWord] = useState('')
     const [defined, setDefined] = useState({})
     const [showCard, setShowCard] = useState(false)
+    const [showOneError, setShowOneError] = useState(false)
     
     const wordEl = useRef()
 
     const handleSubmit = e => {
         e.preventDefault()
-        client.define(word).then(function(result){
-            setDefined(result)
-            setShowCard(true)
-            setWord('')
-        })
+        if(word.split(' ').length !== 1 || word === ''){
+            setShowOneError(true)
+        } else {
+            client.define(word).then(function(result){
+                setDefined(result)
+                setShowCard(true)
+                setShowOneError(false)
+                setWord('')
+            })
+        }
     }
 
-    const renderCard = (word, def) => <WordCard word={word} def={def}/>
+    const renderCard = (definedWord, def) => <WordCard word={definedWord} def={def}/>
 
     return (
         <div>
@@ -30,6 +36,7 @@ export default function InputForm() {
                     <div className="form-group">
                         <label htmlFor="word">Enter a word:</label>
                         <input type="text" ref={wordEl} value={word} onChange={e => setWord(e.target.value)}/>
+                        { showOneError && <small>*Must be a single word.</small>}
                     </div>
                     <div className="form-group">
                         <button className="button">Define</button>
