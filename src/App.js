@@ -3,22 +3,22 @@ import './styles.css'
 import Header from './Components/Header';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import InputForm from './Components/InputForm';
-import Saved from './Saved';
+import Saved from './Components/Saved';
 import WordCon from './Context/WordCon';
-import WordListCon from './Context/WordListCon';
+import SavedWordsCon from './Context/SavedWordsCon';
 
 function App() {
   return (
     <div className="container">
     <Router>
       <WordCon>
-        <WordListCon>
+        <SavedWordsCon>
           <Header />
           <Switch>
             <Route exact path='/' component={InputForm}/>
             <Route exact path='/saved' component={Saved}/>
           </Switch>
-        </WordListCon>
+        </SavedWordsCon>
       </WordCon>
     </Router>
     </div>
