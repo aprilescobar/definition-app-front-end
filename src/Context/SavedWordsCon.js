@@ -13,12 +13,13 @@ const SavedWordsCon = ({children}) => {
 
     const restructure = list => {
         const words = {};
+        const savedList = [];
 
-        list.map(word => {
+        list.forEach(word => {
             const definitionsObject = {
                 definition: word.definition,
                 example: word.example,
-                type: word.type
+                type: word.word_type
             }
             if(words[word.word]){
                 let innerObj = words[word.word]
@@ -29,10 +30,12 @@ const SavedWordsCon = ({children}) => {
                     definitions: [definitionsObject]
                 }
             }
-            // words[word.word] ? words[word.word] = [...word]: words[word.word] = 1
         })
-        setSavedWords(words)
-        console.log(words)
+
+        for(let defined in words){
+            savedList.push(words[defined])
+        }
+        setSavedWords(savedList)
     }
 
     return (

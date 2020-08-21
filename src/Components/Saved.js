@@ -6,10 +6,19 @@ import WordCard from './WordCard'
 export default function Saved() {
     const [savedWords] = useContext(SavedWordsContext)
 
+    const renderCards = () => savedWords.map(obj => {
+        return renderCard(obj.word, obj.definitions)
+    })
+
+    const renderCard = (word, def) => <WordCard word={word} def={def}/>
+
     return (
         <div>
             Saved List
-            {console.log(savedWords)}
+            <div className="card-grid">
+                {renderCards()}
+                {console.log(savedWords)}
+            </div>
         </div>
     )
 }
