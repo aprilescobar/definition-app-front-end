@@ -12,7 +12,7 @@ const SavedWordsCon = ({children}) => {
     },[])
 
     const restructure = list => {
-        const words = {};
+        const collectedWords = {};
         const savedList = [];
 
         list.forEach(word => {
@@ -21,19 +21,19 @@ const SavedWordsCon = ({children}) => {
                 example: word.example,
                 type: word.word_type
             }
-            if(words[word.word]){
-                let innerObj = words[word.word]
+            if(collectedWords[word.word]){
+                let innerObj = collectedWords[word.word]
                 innerObj["definitions"] = [...innerObj["definitions"], definitionsObject]
             } else {
-                words[word.word] = {
+                collectedWords[word.word] = {
                     word: word.word,
                     definitions: [definitionsObject]
                 }
             }
         })
 
-        for(let defined in words){
-            savedList.push(words[defined])
+        for(let defined in collectedWords){
+            savedList.push(collectedWords[defined])
         }
         setSavedWords(savedList)
     }
