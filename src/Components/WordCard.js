@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
+import { SavedWordsContext } from '../Context/SavedWordsCon'
 
-export default function WordCard({word, def}) {
+export default function WordCard({word, defs}) {
     const [flip, setFlip] = useState(true)
     const [height, setHeight] = useState('initial')
+    const [savedList, setSavedList] = useContext(SavedWordsContext)
 
     const frontEl = useRef()
     const backEl = useRef()
@@ -13,7 +15,7 @@ export default function WordCard({word, def}) {
         setHeight(Math.max(frontHeight, backHeight, 150))
     }
 
-    useEffect(() => { setMaxHeight() },[word, def])
+    useEffect(() => { setMaxHeight() },[word, defs])
     useEffect(() => {
         window.addEventListener('resize', setMaxHeight)
         return () => window.removeEventListener('resize', setMaxHeight)
@@ -21,7 +23,7 @@ export default function WordCard({word, def}) {
 
 
     const renderDefs = () => {
-        return def.map((def, index) => {
+        return defs.map((def, index) => {
             const type = decodeString(def.type)
             const definition = decodeString(def.definition)
             const example = decodeString(def.example)
@@ -40,6 +42,26 @@ export default function WordCard({word, def}) {
         const text = document.createElement('textarea')
         text.innerHTML = string
         return text.value
+    }
+
+    const handleSave = () => {
+        defs.forEach(def => {
+            fetch('http://localhost:3000/saved_words', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    word: word,
+                    definition: def.definition,
+                    example: def.example,
+                    word_type: def.type
+                })
+            })
+        })
+        const addWord = { word, definitions: defs }
+        setSavedList([...savedList, addWord])
     }
 
     return (
@@ -61,7 +83,7 @@ export default function WordCard({word, def}) {
                 </div>
             </div>
             <div className="add">
-                <button onClick={() => console.log("click")}>Save</button>
+                <button onClick={handleSave}>Save</button>
             </div>
         </div>
     )
