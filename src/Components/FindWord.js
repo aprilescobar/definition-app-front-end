@@ -26,7 +26,7 @@ export default function InputForm() {
         word.length !== 0 && setShowWordError(true); 
     } 
 
-    const renderCard = (definedWord, def) => <WordCard word={definedWord} def={def}/>
+    const renderCard = (definedWord, defs) => <WordCard word={definedWord} defs={defs}/>
 
     return (
         <div>

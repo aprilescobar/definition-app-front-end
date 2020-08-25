@@ -10,7 +10,7 @@ export default function Saved() {
         return renderCard(obj.word, obj.definitions)
     })
 
-    const renderCard = (word, def) => <WordCard word={word} def={def}/>
+    const renderCard = (word, defs) => <WordCard key={`${word}-${Date.now()}`} word={word} defs={defs}/>
 
     return (
         <div>
